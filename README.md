@@ -7,3 +7,6 @@
   4. Run the command _python -m flask run_
   5. Open the local server url in your browser: _http://127.0.0.1:5000/_   
   6. Enjoy legofying your images. 	:innocent:
+
+## View the palette colors here: 
+https://github.com/JuanPotato/Legofy/blob/master/2010-LEGO-color-palette.pdf
