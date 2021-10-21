@@ -1,5 +1,6 @@
 from flask import Flask, render_template, flash, request, redirect, url_for
 import legofy
+from PIL import Image
 #import os
 
 app = Flask(__name__)
@@ -18,7 +19,18 @@ def uploader():
         passpath = "uploads/"+imagereq.filename
         imgpath = "static/"+passpath
         imagereq.save(imgpath)
-        imagelego = legofy.main(imgpath, size=30)
+
+        nosize = int(request.form['bricksize'])
+        palettes = request.form.get('palettetype').lower()
+        dithert = request.form.get('dither').lower()
+
+        images = Image.open(imagereq)
+        width = images.size[0]
+        height = images.size[1]
+        brsize = int(max(width, height)/nosize)
+
+        imagelego = legofy.main(imgpath, palette_mode=palettes,
+                                size=brsize, dither=dithert)
         legoname = imagereq.filename
         legos, legoext = map(str, legoname.split("."))
         legofn = legos+"_lego.png"
