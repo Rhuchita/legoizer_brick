@@ -12,52 +12,53 @@
     </nav>
     <div class="container">
         <div class="row justify-content-center">
-            <form class="col-6 m-5 g-3" action="/uploadimage" method="post" enctype="multipart/form-data">
-                <label for="imagefile" class="form-label">Upload your Image Here</label><br>
-                <input type="file" name="image">
-                <div class="row mt-3">
-                    <label for="palette" class="form-label">Palette</label>
-                    <select id="palette" name="palettetype" class="form-select">
-                    <option selected>All</option>
-                    <option>Solid</option>
-                    <option>Transparent</option>
-                    <option>Effects</option>
-                    </select>
+            <div class="col">
+                <form class="col-6 m-5 g-3" action="/legofied" method="post" enctype="multipart/form-data">
+                    <label for="imagefile" class="form-label">Upload your Image Here</label><br>
+                    <input type="file" name="image">
+                    <div class="row mt-3">
+                        <label for="palette" class="form-label">Palette</label>
+                        <select id="palette" name="palettetype" class="form-select">
+                        <option selected>All</option>
+                        <option>Solid</option>
+                        <option>Transparent</option>
+                        <option>Effects</option>
+                        </select>
+                    </div>
+                    <div class="row mt-3">
+                        <label for="dither" class="form-label">Dither</label>
+                        <select id="dither" name="dither" class="form-select">
+                        <option selected>No</option>
+                        <option>Yes</option>
+                        </select>
+                    </div>
+                    <div class="row mt-3">
+                        <label for="bricksize" class="form-label">Size</label>
+                        <input id="bricksize" name="bricksize" class="form-control" type="number">
+                    </div>
+                        
+                    <button class="btn-success mt-3" type="submit">Generate Bricks</button>
+                </form>
+            </div>
+            {% if results %}
+                <div class="col">
+                    <img class="img-fluid mb-3" src="{{url_for('static',filename=imagepath)}}" width="75%" height="75%">
                 </div>
-                <div class="row mt-3">
-                    <label for="dither" class="form-label">Dither</label>
-                    <select id="dither" name="dither" class="form-select">
-                    <option selected>No</option>
-                    <option>Yes</option>
-                    </select>
+                <div class="col">
+                    <h5>Colors available in selected palette: {{ p_mode }}</h5>
+                    <hr>
+                    <div class="row">
+                        {% for i in results %}
+                            <div class="col-sm-2 m-2 p-3" style="background-color: {{ i }};">{{ i }}</div>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div class="row mt-3">
-                    <label for="bricksize" class="form-label">Size</label>
-                    <input id="bricksize" name="bricksize" class="form-control" type="number">
-                </div>
-                    
-                <button class="btn-success mt-3" type="submit">Generate Bricks</button>
-            </form>
+            {% endif %}
+            
         </div>
     </div>
 
-    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Your Choices</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-      </div> -->
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
