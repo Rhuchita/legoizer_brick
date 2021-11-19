@@ -4,7 +4,8 @@ from PIL import Image
 import webcolors
 from colorthief import ColorThief
 import os
-port = int(os.environ.get('PORT', 5000))
+port = int(os.environ.get('PORT',5000))
+
 app = Flask(__name__)
 
 
@@ -44,7 +45,7 @@ def uploader():
         brsize = int(max(width, height)/nosize)
 
         imagelego = legofy.main(imgpath, palette_mode=palettes,
-                                size=brsize, dither=dithert)
+                           size=brsize, dither=dithert)
         legoname = imagereq.filename
         legos, legoext = map(str, legoname.split("."))
         legofn = legos+"_lego.png"
